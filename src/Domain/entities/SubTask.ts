@@ -4,8 +4,11 @@ import {
     ManyToOne,
 
 } from 'typeorm';
-import { Task } from './Task';
+
 import { BaseSoftDelete } from '@Domain/common/base-entity/base';
+
+import { Task } from './Task';
+
 
 @Entity({ name: 'subtask' })
 export class SubTask extends BaseSoftDelete {

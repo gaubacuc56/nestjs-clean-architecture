@@ -4,8 +4,11 @@ import {
     OneToOne,
     Unique,
 } from 'typeorm';
-import { User } from './User';
+
 import { BaseSoftDelete } from "@Domain/common/base-entity/base";
+
+import { User } from './User';
+
 
 @Entity({ name: 'userpersonalinfo' })
 @Unique(['userId'])

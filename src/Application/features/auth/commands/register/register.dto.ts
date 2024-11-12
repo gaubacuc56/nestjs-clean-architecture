@@ -1,6 +1,7 @@
+import { Expose } from 'class-transformer';
 import { IsString, IsEmail, IsNotEmpty, MinLength } from 'class-validator';
 
-export class RegisterDto {
+export class RegisterRequest {
     @IsNotEmpty()
     @IsString()
     name: string;
@@ -13,4 +14,11 @@ export class RegisterDto {
     @IsString()
     @MinLength(5)
     password: string;
+}
+
+export class RegisterResponse {
+    @Expose()
+    public email: string;
+    @Expose()
+    public createdAt: Date;
 }

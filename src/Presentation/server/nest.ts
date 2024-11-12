@@ -1,9 +1,13 @@
 import "reflect-metadata"
-import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
-import { AppModule } from './app.module';
-import { config } from "@Domain/config";
+import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
+
+import { config } from "@Domain/config";
+
+import { AppModule } from './app.module';
+
+
 
 declare const module: any;
 

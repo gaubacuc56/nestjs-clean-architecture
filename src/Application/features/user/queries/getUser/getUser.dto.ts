@@ -1,6 +1,10 @@
 import { Expose } from "class-transformer";
 
-export class IFindUserResponse {
+export class GetUserRequest {
+    constructor(public readonly userId: string) { }
+}
+
+export class GetUserResponse {
     @Expose()
     public id: string;
     @Expose()

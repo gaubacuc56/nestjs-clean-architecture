@@ -1,1 +1,14 @@
-{}
+{
+  "plugins": ["@trivago/prettier-plugin-sort-imports"],
+  "importOrder": [
+    "^@nestjs/(.*)$",  
+    "^[./]",       
+    "^@Infrastructure/(.*)$",
+    "^@Domain/(.*)$",
+    "^@Application/(.*)$",
+    "^@Presentation/(.*)$",
+    "^@Shared/(.*)$"
+  ],
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true
+}

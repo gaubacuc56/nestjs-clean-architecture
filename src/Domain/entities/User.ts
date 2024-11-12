@@ -5,10 +5,13 @@ import {
     OneToOne,
     Unique
 } from 'typeorm';
-import { Task } from './Task';
-import { UserPersonalInfo } from './UserPersonalInfo';
+
 import { BaseSoftDelete } from '@Domain/common/base-entity/base';
 import { Role } from '@Domain/common/enum/user';
+
+import { Task } from './Task';
+import { UserPersonalInfo } from './UserPersonalInfo';
+
 
 @Entity({ name: 'user' })
 @Unique(['email'])

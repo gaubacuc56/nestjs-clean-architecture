@@ -4,10 +4,13 @@ import {
     ManyToMany,
     OneToMany,
 } from 'typeorm';
-import { User } from './User';
-import { SubTask } from './SubTask';
+
 import { BaseSoftDelete } from '@Domain/common/base-entity/base';
 import { TASK_PRIORITY, TASK_STATUS } from '@Domain/common/enum/task';
+
+import { SubTask } from './SubTask';
+import { User } from './User';
+
 
 @Entity({ name: 'task' })
 

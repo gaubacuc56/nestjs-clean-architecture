@@ -1,53 +1,60 @@
+
+
 import { Body, Controller, Get, Post, Put, Headers } from "@nestjs/common";
-import { AuthService } from "@Application/features/auth/service";
-import { User } from "@Domain/entities/User";
-import { RequestBody } from "@Shared/types";
-import { LoginDto } from "@Application/DTOs/request/login.dto";
-import { ForgotPasswordDto } from "@Application/DTOs/request/forgotPassword.dto";
-import { ResetPasswordDto } from "@Application/DTOs/request/resetPassword.dto";
-import { ChangePasswordDto } from "@Application/DTOs/request/changePassword.dto";
-import { RegisterDto } from "@Application/DTOs/request/register.dto";
+import { CommandBus } from "@nestjs/cqrs";
 import { ApiBearerAuth, ApiBody, ApiTags } from "@nestjs/swagger";
+
+import { User } from "@Domain/entities/User";
+
+import { ChangePasswordRequest } from "@Application/features/auth/commands/changePassword/changePassword.dto";
+import { ForgotPasswordRequest } from "@Application/features/auth/commands/forgotPassword/forgotPassword.dto";
+import { LoginRequest } from "@Application/features/auth/commands/login/login.dto";
+import { RefreshTokenRequest } from "@Application/features/auth/commands/refreshToken/refreshToken.dto";
+import { RegisterRequest } from "@Application/features/auth/commands/register/register.dto";
+import { ResetPasswordRequest } from "@Application/features/auth/commands/resetPassword/resetPassword.dto";
+
+import { RequestBody } from "@Shared/types";
 
 @ApiTags('Authentication')
 @Controller("auth")
 export class AuthController {
-  constructor(private readonly authService: AuthService) { }
+  constructor(private readonly commandBus: CommandBus) { }
 
   @Post("login")
-  @ApiBody({ type: LoginDto })
-  login(@Body() body: LoginDto) {
-    return this.authService.login(body)
+  @ApiBody({ type: LoginRequest })
+  login(@Body() body: LoginRequest) {
+    return this.commandBus.execute(body)
   }
 
   @Post("signup")
-  @ApiBody({ type: RegisterDto })
-  signup(@Body() body: RegisterDto) {
-    return this.authService.signup(body)
+  @ApiBody({ type: RegisterRequest })
+  signup(@Body() body: RegisterRequest) {
+    return this.commandBus.execute(body)
   }
 
   @Post("forgot-password")
-  @ApiBody({ type: ForgotPasswordDto })
-  forgotPassword(@Body() body: ForgotPasswordDto) {
-    return this.authService.forgotPassword(body)
+  @ApiBody({ type: ForgotPasswordRequest })
+  forgotPassword(@Body() body: ForgotPasswordRequest) {
+    return this.commandBus.execute(body)
   }
 
   @Post("reset-password")
-  @ApiBody({ type: ResetPasswordDto })
-  resetPassword(@Body() body: ResetPasswordDto) {
-    return this.authService.resetPassword(body)
+  @ApiBody({ type: ResetPasswordRequest })
+  resetPassword(@Body() body: ResetPasswordRequest) {
+    return this.commandBus.execute(body)
   }
 
+  @ApiBearerAuth()
   @Post("refresh-token")
   refreshToken(@Headers('authorization') authorization: string) {
-    return this.authService.refreshToken(authorization)
+    return this.commandBus.execute(new RefreshTokenRequest(authorization))
   }
 
   @ApiBearerAuth()
   @Put("change-password")
-  @ApiBody({ type: ChangePasswordDto })
-  changePassword(@Body() body: ChangePasswordDto & User) {
-    return this.authService.changePassword(body)
+  @ApiBody({ type: ChangePasswordRequest })
+  changePassword(@Body() body: ChangePasswordRequest) {
+    return this.commandBus.execute(body)
   }
 
   @ApiBearerAuth()

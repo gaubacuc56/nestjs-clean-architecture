@@ -1,5 +1,7 @@
-import { config } from "@Domain/config";
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
+
+import { config } from "@Domain/config";
+
 
 export const OrmDataSource: TypeOrmModuleOptions = {
     type: "mysql",

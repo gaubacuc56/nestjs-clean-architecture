@@ -1,13 +1,16 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import * as jwt from "jsonwebtoken";
-import { AUTH_ERRORS } from "@Application/common/constant/message";
-import { config } from "@Domain/config";
+
 import {
     ACCESS_TOKEN_EXPIRATION,
     REFRESH_TOKEN_EXPIRATION,
 } from "@Domain/common/constant/jwt";
 import { HTTP_MSG } from "@Domain/common/constant/message";
+import { config } from "@Domain/config";
 import { UnauthorizedException } from "@Domain/exceptions/error-handler";
+
+import { AUTH_ERRORS } from "@Application/common/constant/message";
+
 
 export const generateAccessToken = async (userInfo: string) => {
     const token = jwt.sign(
