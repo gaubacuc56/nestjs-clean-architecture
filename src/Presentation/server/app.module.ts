@@ -7,6 +7,6 @@ import { CommonModule } from "@Presentation/server/module/common";
 import { UserModule } from "@Presentation/server/module/user";
 
 @Module({
-  imports: [DatabaseModule, CommonModule, AuthModule, UserModule],
+    imports: [DatabaseModule, CommonModule, AuthModule, UserModule],
 })
 export class AppModule {}

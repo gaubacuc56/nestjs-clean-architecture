@@ -1,26 +1,26 @@
 {
-  "compilerOptions": {
-    "strict": true,
-    "strictPropertyInitialization": false,
-    "lib": ["ES5", "ES6", "DOM"],
-    "target": "ES5",
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "outDir": "./build",
-    "isolatedModules": true,
-    "sourceMap": true,
-    "esModuleInterop": true,
-    "noImplicitAny": true,
-    "noImplicitThis": true,
-    "noImplicitReturns": true,
-    "forceConsistentCasingInFileNames": true,
-    "baseUrl": ".",
-    "paths": {
-      "@*": ["./src/*"]
-    }
-  },
-  "include": ["src/**/*.ts"],
-  "exclude": ["node_modules"]
+    "compilerOptions": {
+        "strict": true,
+        "strictPropertyInitialization": false,
+        "lib": ["ES5", "ES6", "DOM"],
+        "target": "ES5",
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "outDir": "./build",
+        "isolatedModules": true,
+        "sourceMap": true,
+        "esModuleInterop": true,
+        "noImplicitAny": true,
+        "noImplicitThis": true,
+        "noImplicitReturns": true,
+        "forceConsistentCasingInFileNames": true,
+        "baseUrl": ".",
+        "paths": {
+            "@*": ["./src/*"]
+        }
+    },
+    "include": ["src/**/*.ts"],
+    "exclude": ["node_modules"]
 }

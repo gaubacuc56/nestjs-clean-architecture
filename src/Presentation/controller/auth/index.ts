@@ -16,48 +16,48 @@ import { RequestBody } from "@Shared/types";
 @ApiTags("Authentication")
 @Controller("auth")
 export class AuthController {
-  constructor(private readonly commandBus: CommandBus) {}
+    constructor(private readonly commandBus: CommandBus) {}
 
-  @Post("login")
-  @ApiBody({ type: LoginRequest })
-  login(@Body() body: LoginRequest) {
-    return this.commandBus.execute(body);
-  }
+    @Post("login")
+    @ApiBody({ type: LoginRequest })
+    login(@Body() body: LoginRequest) {
+        return this.commandBus.execute(body);
+    }
 
-  @Post("signup")
-  @ApiBody({ type: RegisterRequest })
-  signup(@Body() body: RegisterRequest) {
-    return this.commandBus.execute(body);
-  }
+    @Post("signup")
+    @ApiBody({ type: RegisterRequest })
+    signup(@Body() body: RegisterRequest) {
+        return this.commandBus.execute(body);
+    }
 
-  @Post("forgot-password")
-  @ApiBody({ type: ForgotPasswordRequest })
-  forgotPassword(@Body() body: ForgotPasswordRequest) {
-    return this.commandBus.execute(body);
-  }
+    @Post("forgot-password")
+    @ApiBody({ type: ForgotPasswordRequest })
+    forgotPassword(@Body() body: ForgotPasswordRequest) {
+        return this.commandBus.execute(body);
+    }
 
-  @Post("reset-password")
-  @ApiBody({ type: ResetPasswordRequest })
-  resetPassword(@Body() body: ResetPasswordRequest) {
-    return this.commandBus.execute(body);
-  }
+    @Post("reset-password")
+    @ApiBody({ type: ResetPasswordRequest })
+    resetPassword(@Body() body: ResetPasswordRequest) {
+        return this.commandBus.execute(body);
+    }
 
-  @ApiBearerAuth()
-  @Post("refresh-token")
-  refreshToken(@Headers("authorization") authorization: string) {
-    return this.commandBus.execute(new RefreshTokenRequest(authorization));
-  }
+    @ApiBearerAuth()
+    @Post("refresh-token")
+    refreshToken(@Headers("authorization") authorization: string) {
+        return this.commandBus.execute(new RefreshTokenRequest(authorization));
+    }
 
-  @ApiBearerAuth()
-  @Put("change-password")
-  @ApiBody({ type: ChangePasswordRequest })
-  changePassword(@Body() body: ChangePasswordRequest) {
-    return this.commandBus.execute(body);
-  }
+    @ApiBearerAuth()
+    @Put("change-password")
+    @ApiBody({ type: ChangePasswordRequest })
+    changePassword(@Body() body: ChangePasswordRequest) {
+        return this.commandBus.execute(body);
+    }
 
-  @ApiBearerAuth()
-  @Get("me")
-  me(@Body() body: RequestBody<User>) {
-    return body;
-  }
+    @ApiBearerAuth()
+    @Get("me")
+    me(@Body() body: RequestBody<User>) {
+        return body;
+    }
 }

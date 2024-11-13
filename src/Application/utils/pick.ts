@@ -6,17 +6,17 @@
  * @returns An object composed of the picked properties
  */
 export const pick = <T extends Record<string, any>, K extends keyof T>(
-  object: T,
-  keys: K[],
+    object: T,
+    keys: K[],
 ): Pick<T, K> => {
-  return keys.reduce(
-    (obj, key) => {
-      if (object && Object.prototype.hasOwnProperty.call(object, key)) {
-        // eslint-disable-next-line no-param-reassign
-        obj[key] = object[key];
-      }
-      return obj;
-    },
-    {} as Pick<T, K>,
-  );
+    return keys.reduce(
+        (obj, key) => {
+            if (object && Object.prototype.hasOwnProperty.call(object, key)) {
+                // eslint-disable-next-line no-param-reassign
+                obj[key] = object[key];
+            }
+            return obj;
+        },
+        {} as Pick<T, K>,
+    );
 };
