@@ -1,2 +1,2 @@
 . .husky/common.sh
-yarn lint
+npx lint-staged
