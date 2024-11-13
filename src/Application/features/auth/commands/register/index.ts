@@ -14,23 +14,21 @@ import { Mapper } from '@Shared/mapper';
 
 import { RegisterRequest, RegisterResponse } from './register.dto';
 
-
-
 @CommandHandler(RegisterRequest)
 export class RegisterHandler implements ICommandHandler<RegisterRequest> {
-    constructor(private readonly userRepository: UserRepository) { }
-    async execute(req: RegisterRequest): Promise<Result<RegisterResponse>> {
-        const { email } = req;
-        let user = await this.userRepository.findByEmail(email);
-        if (user) throw new BadRequestException(AUTH_ERRORS.EXISTED_USER);
+  constructor(private readonly userRepository: UserRepository) {}
+  async execute(req: RegisterRequest): Promise<Result<RegisterResponse>> {
+    const { email } = req;
+    let user = await this.userRepository.findByEmail(email);
+    if (user) throw new BadRequestException(AUTH_ERRORS.EXISTED_USER);
 
-        user = await this.userRepository.createUser({
-            ...req,
-            password: hashSync(req.password, 10),
-        });
+    user = await this.userRepository.createUser({
+      ...req,
+      password: hashSync(req.password, 10),
+    });
 
-        return new Result({
-            data: Mapper(RegisterResponse, user)
-        });
-    }
+    return new Result({
+      data: Mapper(RegisterResponse, user),
+    });
+  }
 }

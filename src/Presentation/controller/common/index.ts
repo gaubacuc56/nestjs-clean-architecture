@@ -1,12 +1,11 @@
-import { Controller, Get } from "@nestjs/common";
-import { ApiTags } from "@nestjs/swagger";
+import { Controller, Get } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Health')
-@Controller("health")
+@Controller('health')
 export class CommonController {
-
-  @Get("")
+  @Get('')
   getHello(): string {
-    return "App is running";
+    return 'App is running';
   }
 }

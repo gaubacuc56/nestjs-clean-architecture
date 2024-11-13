@@ -1,17 +1,14 @@
-import { Injectable } from "@nestjs/common";
-import { InjectRepository } from "@nestjs/typeorm";
+import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
 
-import { MoreThanOrEqual, Repository } from 'typeorm'
+import { MoreThanOrEqual, Repository } from 'typeorm';
 
-import { User } from "@Domain/entities/User";
+import { User } from '@Domain/entities/User';
 
 import { IUserRepository } from '@Application/interfaces/user';
 
-
-
 @Injectable()
 export class UserRepository implements IUserRepository {
-
   constructor(
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
@@ -34,11 +31,7 @@ export class UserRepository implements IUserRepository {
     return await this.userRepository.findOne({ where: { id } });
   }
 
-  public async createUser(data: {
-    password: string;
-    email: string;
-    name: string;
-  }) {
+  public async createUser(data: { password: string; email: string; name: string }) {
     const newUser = this.userRepository.create(data);
     return await this.userRepository.save(newUser);
   }
@@ -46,7 +39,7 @@ export class UserRepository implements IUserRepository {
   public async updateResetKey(
     id: string,
     resetKey: string | undefined,
-    resetKeyExpired: Date | undefined
+    resetKeyExpired: Date | undefined,
   ) {
     await this.userRepository.update(id, { resetKey, resetKeyExpired });
   }

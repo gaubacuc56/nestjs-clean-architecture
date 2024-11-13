@@ -2,11 +2,7 @@
   "compilerOptions": {
     "strict": true,
     "strictPropertyInitialization": false,
-    "lib": [
-      "ES5",
-      "ES6",
-      "DOM"
-    ],
+    "lib": ["ES5", "ES6", "DOM"],
     "target": "ES5",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
@@ -22,15 +18,9 @@
     "forceConsistentCasingInFileNames": true,
     "baseUrl": ".",
     "paths": {
-      "@*": [
-        "./src/*"
-      ]
-    },
+      "@*": ["./src/*"]
+    }
   },
-  "include": [
-    "src/**/*.ts"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules"]
 }

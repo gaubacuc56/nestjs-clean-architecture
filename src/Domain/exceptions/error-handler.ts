@@ -1,7 +1,6 @@
-import { HttpStatus } from "@Domain/common/enum/http";
+import { HttpStatus } from '@Domain/common/enum/http';
 
-import { HttpException } from "./root";
-
+import { HttpException } from './root';
 
 export class NotModifiedException extends HttpException {
   constructor(message: string) {

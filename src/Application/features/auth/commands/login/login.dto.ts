@@ -1,16 +1,16 @@
 import { IsString, IsEmail, IsNotEmpty } from 'class-validator';
 
 export class LoginRequest {
-    @IsNotEmpty()
-    @IsEmail()
-    email: string;
+  @IsNotEmpty()
+  @IsEmail()
+  email: string;
 
-    @IsNotEmpty()
-    @IsString()
-    password: string;
+  @IsNotEmpty()
+  @IsString()
+  password: string;
 }
 
 export class LoginResponse {
-    token: string;
-    refreshToken: string;
+  token: string;
+  refreshToken: string;
 }
