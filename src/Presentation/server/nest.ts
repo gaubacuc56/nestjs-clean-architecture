@@ -7,8 +7,6 @@ import { config } from "@Domain/config";
 
 import { AppModule } from './app.module';
 
-
-
 declare const module: any;
 
 async function bootstrap() {

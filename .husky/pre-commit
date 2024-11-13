@@ -1,1 +1,2 @@
-npm test
+. .husky/common.sh
+yarn lint
