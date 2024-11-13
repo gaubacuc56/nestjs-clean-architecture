@@ -92,10 +92,8 @@
   },
   "lint-staged": {
     "*.{ts,js}": [
-      "eslint --fix",
       "prettier --write --ignore-unknown",
-      "git add"
-    ],
-    "*.js": "eslint --cache --fix"
+      "eslint --fix"
+    ]
   }
 }
