@@ -13,7 +13,7 @@ import { UserModule } from "@Presentation/server/module/user";
 
 @Module({
   imports: [UserModule],
-  providers: [LoginHandler, RegisterHandler, ChangePasswordHandler, ForgotPasswordHandler, ResetPasswordHandler, RefreshTokenHandler],
+        providers: [LoginHandler, RegisterHandler, ChangePasswordHandler, ForgotPasswordHandler, ResetPasswordHandler, RefreshTokenHandler],
   controllers: [AuthController],
 })
 export class AuthModule implements NestModule {

@@ -10,18 +10,13 @@ import { config } from "@Domain/config";
 import { UnauthorizedException } from "@Domain/exceptions/error-handler";
 
 import { AUTH_ERRORS } from "@Application/common/constant/message";
-import { IFindUserResponse } from "@Application/DTOs/response/user";
-import { GetUserRequest } from '@Application/features/user/queries/getUser/getUser.dto';
+import { GetUserRequest, GetUserResponse } from '@Application/features/user/queries/getUser/getUser.dto';
 import { verifyAuthorizationHeader } from "@Application/utils/jwt";
-
 
 import { RequestBody } from "@Shared/types";
 
-
-
-
 interface IReAuthRequest<T> extends RequestBody<T> {
-  body: T & IFindUserResponse;
+  body: T & GetUserResponse;
 }
 
 @Injectable()
