@@ -1,13 +1,13 @@
 import { HttpStatus } from "@Domain/common/enum/http";
 
 export class Result<T = unknown> {
-    public data?: T = undefined;
-    public statusCode: HttpStatus = HttpStatus.OK;
+    public statusCode?: HttpStatus = HttpStatus.OK;
     public message?: string = "Successfully";
-    public currentPage?: number = undefined;
+    public data?: T | T[] = undefined;
+    public pageSize?: number = undefined;
+    public pageNumber?: number = undefined;
     public totalPages?: number = undefined;
     public totalCount?: number = undefined;
-    public pageSize?: number = undefined;
     public hasPreviousPage?: boolean = undefined;
     public hasNextPage?: boolean = undefined;
 

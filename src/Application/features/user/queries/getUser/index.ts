@@ -1,4 +1,3 @@
-// src/auth/handlers/login.handler.ts
 import { QueryHandler, IQueryHandler } from "@nestjs/cqrs";
 
 import { UserRepository } from "@Infrastructure/database/repository/user";
@@ -15,10 +14,11 @@ export class GetUserHandler implements IQueryHandler<GetUserRequest> {
     async execute(
         req: GetUserRequest,
     ): Promise<Result<GetUserResponse | null>> {
-        const { userId } = req;
-        const user = await this.userRepository.findById(userId);
+        const { id } = req;
+        const user = await this.userRepository.findById(id);
         return new Result({
-            data: user ? Mapper(GetUserResponse, user) : null,
+            data:
+                user && !user.isDeleted ? Mapper(GetUserResponse, user) : null,
         });
     }
 }

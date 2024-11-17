@@ -1,25 +1,28 @@
 import { Injectable } from "@nestjs/common";
-import { InjectRepository } from "@nestjs/typeorm";
 
-import { MoreThanOrEqual, Repository } from "typeorm";
+import { EntityManager, MoreThanOrEqual } from "typeorm";
 
 import { User } from "@Domain/entities/User";
 
 import { IUserRepository } from "@Application/interfaces/user";
 
+import { GenericRepository } from "../_generic";
+
 @Injectable()
 export class UserRepository implements IUserRepository {
-    constructor(
-        @InjectRepository(User)
-        private readonly userRepository: Repository<User>,
-    ) {}
+    private userRepository: GenericRepository<User>;
+    constructor(private manager: EntityManager) {
+        this.userRepository = new GenericRepository(User, manager);
+    }
 
     public async findByEmail(email: string) {
-        return await this.userRepository.findOne({ where: { email } });
+        return await this.userRepository
+            .getRepository()
+            .findOne({ where: { email } });
     }
 
     public async findByResetKey(resetKey: string) {
-        return await this.userRepository.findOne({
+        return await this.userRepository.getRepository().findOne({
             where: {
                 resetKey,
                 resetKeyExpired: MoreThanOrEqual(new Date()),
@@ -28,7 +31,7 @@ export class UserRepository implements IUserRepository {
     }
 
     public async findById(id: string) {
-        return await this.userRepository.findOne({ where: { id } });
+        return await this.userRepository.findById(id);
     }
 
     public async createUser(data: {
@@ -36,8 +39,7 @@ export class UserRepository implements IUserRepository {
         email: string;
         name: string;
     }) {
-        const newUser = this.userRepository.create(data);
-        return await this.userRepository.save(newUser);
+        return this.userRepository.create(data);
     }
 
     public async updateResetKey(
@@ -50,5 +52,19 @@ export class UserRepository implements IUserRepository {
 
     public async changePassword(id: string, password: string) {
         await this.userRepository.update(id, { password });
+    }
+
+    public async deleteUser(id: string) {
+        await this.userRepository.softDelete(id);
+    }
+
+    public async findUsers(req: {
+        pageNumber: number;
+        pageSize: number;
+        sortField: string;
+        sortDirection: string;
+        filters: object | undefined;
+    }) {
+        return await this.userRepository.findMany(req);
     }
 }

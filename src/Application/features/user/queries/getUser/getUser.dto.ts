@@ -1,8 +1,8 @@
 import { Expose } from "class-transformer";
 
-export class GetUserRequest {
-    constructor(public readonly userId: string) {}
-}
+import { IRequest } from "@Domain/common/dtos/request.dto";
+
+export class GetUserRequest extends IRequest {}
 
 export class GetUserResponse {
     @Expose()

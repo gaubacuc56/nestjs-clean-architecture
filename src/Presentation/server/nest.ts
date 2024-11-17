@@ -34,6 +34,7 @@ async function bootstrap() {
     });
 
     await app.listen(config.PORT);
+    console.log(`Server is running on http://localhost:${config.PORT}/api`);
     if (module.hot) {
         module.hot.accept();
         module.hot.dispose(() => app.close());
