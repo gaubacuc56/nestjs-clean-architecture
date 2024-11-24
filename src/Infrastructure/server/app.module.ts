@@ -1,9 +1,9 @@
 import { Module } from "@nestjs/common";
-import { APP_GUARD } from '@nestjs/core';
+import { APP_GUARD } from "@nestjs/core";
 
 import { DatabaseModule } from "@Infrastructure/database/database.module";
-import { RolesGuard } from "@Infrastructure/guard";
 
+import { RolesGuard } from "@Presentation/middleware/rolesGuard";
 import { AuthModule } from "@Presentation/module/auth";
 import { CommonModule } from "@Presentation/module/common";
 import { UserModule } from "@Presentation/module/user";
@@ -17,4 +17,4 @@ import { UserModule } from "@Presentation/module/user";
         },
     ],
 })
-export class AppModule { }
+export class AppModule {}

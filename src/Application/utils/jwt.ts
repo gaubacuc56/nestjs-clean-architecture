@@ -5,17 +5,17 @@ import {
     ACCESS_TOKEN_EXPIRATION,
     REFRESH_TOKEN_EXPIRATION,
 } from "@Domain/common/constant/jwt";
-import { HTTP_MSG } from "@Domain/common/constant/message";
+import { AUTH_ERRORS } from "@Domain/common/constant/message/auth";
+import { HTTP_MSG } from "@Domain/common/constant/message/http";
+import { Role } from "@Domain/common/enum/user";
 import { config } from "@Domain/config";
 import { UnauthorizedException } from "@Domain/exceptions/error-handler";
 
-import { AUTH_ERRORS } from "@Application/common/constant/message";
-
-export const generateAccessToken = async (userInfo: string) => {
+export const generateAccessToken = async (userInfo: string, roles?: Role[]) => {
     const token = jwt.sign(
         {
             userInfo,
-            roles: "test"
+            roles,
         },
         config.JWT_SECRET,
         { expiresIn: ACCESS_TOKEN_EXPIRATION },

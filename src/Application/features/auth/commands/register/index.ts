@@ -1,14 +1,16 @@
 // src/auth/handlers/login.handler.ts
-import { BadRequestException } from "@nestjs/common";
+import { BadRequestException, Inject } from "@nestjs/common";
 import { CommandHandler, ICommandHandler } from "@nestjs/cqrs";
 
 import { hashSync } from "bcrypt";
 
-import { UserRepository } from "@Infrastructure/database/repository/user";
-
+import { AUTH_ERRORS } from "@Domain/common/constant/message/auth";
 import { Result } from "@Domain/result";
 
-import { AUTH_ERRORS } from "@Application/common/constant/message";
+import {
+    IUserRepository,
+    IUserRepositoryToken,
+} from "@Application/interfaces/user";
 
 import { Mapper } from "@Shared/mapper";
 
@@ -16,7 +18,10 @@ import { RegisterRequest, RegisterResponse } from "./register.dto";
 
 @CommandHandler(RegisterRequest)
 export class RegisterHandler implements ICommandHandler<RegisterRequest> {
-    constructor(private readonly userRepository: UserRepository) {}
+    constructor(
+        @Inject(IUserRepositoryToken)
+        private readonly userRepository: IUserRepository,
+    ) {}
     async execute(req: RegisterRequest): Promise<Result<RegisterResponse>> {
         const { email } = req;
         let user = await this.userRepository.findByEmail(email);

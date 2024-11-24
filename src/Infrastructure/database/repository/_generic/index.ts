@@ -7,6 +7,8 @@ import {
     DeepPartial,
 } from "typeorm";
 
+import { SortDirection } from "@Domain/common/enum/sortOder";
+
 export class GenericRepository<T extends ObjectLiteral> {
     private repository: Repository<T>;
 
@@ -28,7 +30,7 @@ export class GenericRepository<T extends ObjectLiteral> {
             pageNumber,
             pageSize,
             sortField = "createdAt",
-            sortDirection = "ASC",
+            sortDirection = SortDirection.ASC,
             filters,
         } = req;
 

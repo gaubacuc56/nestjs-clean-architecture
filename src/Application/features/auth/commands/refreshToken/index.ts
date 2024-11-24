@@ -3,10 +3,10 @@
 import { UnauthorizedException } from "@nestjs/common";
 import { CommandHandler, ICommandHandler } from "@nestjs/cqrs";
 
+import { AUTH_ERRORS } from "@Domain/common/constant/message/auth";
 import { config } from "@Domain/config";
 import { Result } from "@Domain/result";
 
-import { AUTH_ERRORS } from "@Application/common/constant/message";
 import {
     verifyAuthorizationHeader,
     generateAccessToken,
@@ -31,7 +31,10 @@ export class RefreshTokenHandler
         if (!payload)
             throw new UnauthorizedException(AUTH_ERRORS.INVALID_TOKEN);
 
-        const token = await generateAccessToken(payload.userInfo);
+        const token = await generateAccessToken(
+            payload.userInfo,
+            payload["roles"],
+        );
 
         const refreshToken = await generateRefreshToken(payload.userInfo);
         return new Result({

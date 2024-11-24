@@ -1,15 +1,17 @@
 // src/auth/handlers/login.handler.ts
-import { BadRequestException } from "@nestjs/common";
+import { BadRequestException, Inject } from "@nestjs/common";
 import { CommandHandler, ICommandHandler } from "@nestjs/cqrs";
 
 import crypto from "crypto";
 
-import { UserRepository } from "@Infrastructure/database/repository/user";
-
+import { AUTH_ERRORS } from "@Domain/common/constant/message/auth";
 import { config } from "@Domain/config";
 import { Result } from "@Domain/result";
 
-import { AUTH_ERRORS } from "@Application/common/constant/message";
+import {
+    IUserRepository,
+    IUserRepositoryToken,
+} from "@Application/interfaces/user";
 import { transporter } from "@Application/utils/send-mail";
 
 import { ForgotPasswordRequest } from "./forgotPassword.dto";
@@ -18,7 +20,10 @@ import { ForgotPasswordRequest } from "./forgotPassword.dto";
 export class ForgotPasswordHandler
     implements ICommandHandler<ForgotPasswordRequest>
 {
-    constructor(private readonly userRepository: UserRepository) {}
+    constructor(
+        @Inject(IUserRepositoryToken)
+        private readonly userRepository: IUserRepository,
+    ) {}
     async execute(req: ForgotPasswordRequest): Promise<Result> {
         const { email } = req;
         const user = await this.userRepository.findByEmail(email);
