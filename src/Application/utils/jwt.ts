@@ -15,6 +15,7 @@ export const generateAccessToken = async (userInfo: string) => {
     const token = jwt.sign(
         {
             userInfo,
+            roles: "test"
         },
         config.JWT_SECRET,
         { expiresIn: ACCESS_TOKEN_EXPIRATION },

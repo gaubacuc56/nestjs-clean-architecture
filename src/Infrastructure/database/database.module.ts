@@ -3,14 +3,14 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 
 import { Entities } from "@Domain/entities";
 
-import { OrmDataSource } from "./data-source/typeorm";
+import { NestOrmConfig } from "./data-source/orm-config";
 
 @Global()
 @Module({
     imports: [
-        TypeOrmModule.forRoot(OrmDataSource),
+        TypeOrmModule.forRoot(NestOrmConfig),
         TypeOrmModule.forFeature(Entities),
     ],
     exports: [TypeOrmModule.forFeature(Entities)],
 })
-export class DatabaseModule {}
+export class DatabaseModule { }

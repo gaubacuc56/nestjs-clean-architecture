@@ -7,7 +7,7 @@ import { config } from "@Domain/config";
 import { UnauthorizedException } from "@Domain/exceptions/error-handler";
 
 import { AUTH_ERRORS } from "@Application/common/constant/message";
-import { GetUserResponse } from "@Application/features/user/queries/getUser/getUser.dto";
+import { GetUserRequest, GetUserResponse } from "@Application/features/user/queries/getUser/getUser.dto";
 import { verifyAuthorizationHeader } from "@Application/utils/jwt";
 
 import { RequestBody } from "@Shared/types";
@@ -18,7 +18,7 @@ interface IReAuthRequest<T> extends RequestBody<T> {
 
 @Injectable()
 export class AuthMiddleware implements NestMiddleware {
-    constructor(private readonly queryBus: QueryBus) {}
+    constructor(private readonly queryBus: QueryBus) { }
 
     async use<T>(req: IReAuthRequest<T>, res: Response, next: NextFunction) {
         try {
@@ -27,7 +27,7 @@ export class AuthMiddleware implements NestMiddleware {
                 config.JWT_SECRET,
             );
 
-            const user = await this.queryBus.execute(payload.userInfo);
+            const user = await this.queryBus.execute(new GetUserRequest(payload.userInfo));
 
             if (!user) next();
             else req.body = { ...req.body, ...user.data };

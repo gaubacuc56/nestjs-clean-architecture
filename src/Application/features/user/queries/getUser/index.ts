@@ -10,7 +10,7 @@ import { GetUserRequest, GetUserResponse } from "./getUser.dto";
 
 @QueryHandler(GetUserRequest)
 export class GetUserHandler implements IQueryHandler<GetUserRequest> {
-    constructor(private readonly userRepository: UserRepository) {}
+    constructor(private readonly userRepository: UserRepository) { }
     async execute(
         req: GetUserRequest,
     ): Promise<Result<GetUserResponse | null>> {

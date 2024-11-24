@@ -14,7 +14,7 @@ import { ResetPasswordHandler } from "@Application/features/auth/commands/resetP
 
 import { AuthController } from "@Presentation/controller/auth";
 import { AuthMiddleware } from "@Presentation/middleware/auth";
-import { UserModule } from "@Presentation/server/module/user";
+import { UserModule } from "@Presentation/module/user";
 
 @Module({
     imports: [UserModule],
