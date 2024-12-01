@@ -1,6 +1,7 @@
 import "reflect-metadata";
 import { ValidationPipe } from "@nestjs/common";
 import { NestFactory } from "@nestjs/core";
+import { CommandBus } from '@nestjs/cqrs';
 import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
 
 import { config } from "@Domain/config";
@@ -11,6 +12,7 @@ declare const module: any;
 
 async function bootstrap() {
     const app = await NestFactory.create(AppModule);
+    const commandBus = app.get(CommandBus);
     app.setGlobalPrefix("api");
     app.enableCors();
     app.useGlobalPipes(
