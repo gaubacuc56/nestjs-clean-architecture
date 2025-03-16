@@ -14,4 +14,6 @@ export const config = {
     DB_USERNAME: process.env.DB_USERNAME || "",
     DB_PASSWORD: process.env.DB_PASSWORD || "",
     DB_SCHEMA: process.env.DB_SCHEMA || "",
+    TELEGRAM_BOT_TOKEN: process.env.TELEGRAM_BOT_TOKEN || "",
+    TELEGRAM_CHAT_ID: process.env.TELEGRAM_CHAT_ID || 0,
 };
